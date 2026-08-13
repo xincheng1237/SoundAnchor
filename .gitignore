@@ -1,0 +1,15 @@
+.DS_Store
+.build/
+.build-app/
+.swiftpm/
+DerivedData/
+dist/
+
+# Local design explorations and superseded artwork
+Assets/IconCandidates/
+Assets/AppIcon-v2.icns
+Assets/SoundAnchor-AppIcon-1024-v2.png
+Assets/SoundAnchor-AppIcon-1024.png
+Assets/SoundAnchor-AppIcon-selected-source.png
+Assets/SoundAnchor-AppIcon-v2.png
+docs/ICON_CANDIDATES.md

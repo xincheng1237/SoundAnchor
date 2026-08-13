@@ -1,0 +1,47 @@
+name: Bug report
+description: Report a reproducible SoundAnchor problem
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Please do not attach recordings, private logs, or account data.
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version
+      placeholder: "15.6"
+    validations:
+      required: true
+  - type: input
+    id: mac
+    attributes:
+      label: Mac model
+      placeholder: "MacBook Pro, Apple Silicon"
+    validations:
+      required: true
+  - type: input
+    id: headset
+    attributes:
+      label: Headset and firmware
+      placeholder: "HUAWEI FreeClip, firmware ..."
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
