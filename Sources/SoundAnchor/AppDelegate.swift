@@ -43,7 +43,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         menu.delegate = self
         statusItem.menu = menu
         if let button = statusItem.button {
-            button.toolTip = "声锚 SoundAnchor"
+            button.toolTip = L10n.text("app.name")
             StatusBarIconFactory.configure(button: button)
         }
         updateStatusIcon()
@@ -52,6 +52,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     private func configureFirstRunLoginItem() {
         guard !preferences.didConfigureLoginItem,
+              Bundle.main.bundleIdentifier == LoginItemManager.label,
               Bundle.main.bundleURL.pathExtension == "app" else { return }
         do {
             try LoginItemManager.setEnabled(true)
@@ -78,17 +79,17 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         menu.addItem(status)
         menu.addItem(.separator())
 
-        let protection = NSMenuItem(title: "启用音质保护", action: #selector(toggleProtection), keyEquivalent: "")
+        let protection = NSMenuItem(title: L10n.text("protection.enable"), action: #selector(toggleProtection), keyEquivalent: "")
         protection.target = self
         protection.state = preferences.isEnabled ? .on : .off
         menu.addItem(protection)
 
-        let bluetoothOnly = NSMenuItem(title: "仅在蓝牙输出时保护", action: #selector(toggleBluetoothOnly), keyEquivalent: "")
+        let bluetoothOnly = NSMenuItem(title: L10n.text("protection.bluetooth_only.menu"), action: #selector(toggleBluetoothOnly), keyEquivalent: "")
         bluetoothOnly.target = self
         bluetoothOnly.state = preferences.protectsOnlyWithBluetoothOutput ? .on : .off
         menu.addItem(bluetoothOnly)
 
-        let inputItem = NSMenuItem(title: "锚定的输入设备", action: nil, keyEquivalent: "")
+        let inputItem = NSMenuItem(title: L10n.text("input.anchored"), action: nil, keyEquivalent: "")
         let inputMenu = NSMenu()
         for device in inputDevices {
             let item = NSMenuItem(title: device.name, action: #selector(selectInput(_:)), keyEquivalent: "")
@@ -98,7 +99,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             inputMenu.addItem(item)
         }
         if inputDevices.isEmpty {
-            let item = NSMenuItem(title: "未找到输入设备", action: nil, keyEquivalent: "")
+            let item = NSMenuItem(title: L10n.text("input.none_found"), action: nil, keyEquivalent: "")
             item.isEnabled = false
             inputMenu.addItem(item)
         }
@@ -107,31 +108,31 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
         menu.addItem(.separator())
 
-        let repair = NSMenuItem(title: "立即修复", action: #selector(repairNow), keyEquivalent: "r")
+        let repair = NSMenuItem(title: L10n.text("action.repair_now"), action: #selector(repairNow), keyEquivalent: "r")
         repair.target = self
         menu.addItem(repair)
 
-        let settings = NSMenuItem(title: "设置…", action: #selector(openSettings), keyEquivalent: ",")
+        let settings = NSMenuItem(title: L10n.text("action.settings"), action: #selector(openSettings), keyEquivalent: ",")
         settings.target = self
         menu.addItem(settings)
 
-        let login = NSMenuItem(title: "登录时自动运行", action: #selector(toggleLoginItem), keyEquivalent: "")
+        let login = NSMenuItem(title: L10n.text("launch_at_login"), action: #selector(toggleLoginItem), keyEquivalent: "")
         login.target = self
         login.state = LoginItemManager.isEnabled ? .on : .off
         menu.addItem(login)
 
-        let menuBarItem = NSMenuItem(title: "在菜单栏中显示", action: #selector(toggleMenuBarItem), keyEquivalent: "")
+        let menuBarItem = NSMenuItem(title: L10n.text("menu_bar.show"), action: #selector(toggleMenuBarItem), keyEquivalent: "")
         menuBarItem.target = self
         menuBarItem.state = preferences.showsMenuBarItem ? .on : .off
         menu.addItem(menuBarItem)
 
         menu.addItem(.separator())
 
-        let about = NSMenuItem(title: "关于声锚", action: #selector(showAbout), keyEquivalent: "")
+        let about = NSMenuItem(title: L10n.text("action.about"), action: #selector(showAbout), keyEquivalent: "")
         about.target = self
         menu.addItem(about)
 
-        let quit = NSMenuItem(title: "退出声锚", action: #selector(quitApp), keyEquivalent: "q")
+        let quit = NSMenuItem(title: L10n.text("action.quit"), action: #selector(quitApp), keyEquivalent: "q")
         quit.target = self
         menu.addItem(quit)
     }
@@ -162,7 +163,7 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             try LoginItemManager.setEnabled(!LoginItemManager.isEnabled)
         } catch {
             let alert = NSAlert(error: error)
-            alert.messageText = "无法更改登录启动设置"
+            alert.messageText = L10n.text("error.launch_at_login")
             alert.runModal()
         }
     }
@@ -178,9 +179,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
 
     @objc private func showAbout() {
         let alert = NSAlert()
-        alert.messageText = "声锚 SoundAnchor"
-        alert.informativeText = "让蓝牙耳机保持高音质。\n\n事件驱动，无轮询、无遥测、无网络请求。"
-        alert.addButton(withTitle: "好")
+        alert.messageText = L10n.text("app.name")
+        alert.informativeText = L10n.text("about.message")
+        alert.addButton(withTitle: L10n.text("action.ok"))
         if let icon = NSApp.applicationIconImage {
             alert.icon = icon
         }

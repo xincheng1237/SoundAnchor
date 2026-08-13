@@ -42,9 +42,9 @@ struct AudioSnapshot: Equatable {
 
     static let starting = AudioSnapshot(
         protectionState: .disabled,
-        currentInputName: "正在读取…",
-        currentOutputName: "正在读取…",
-        anchoredInputName: "自动选择内建麦克风",
+        currentInputName: L10n.text("status.reading_short"),
+        currentOutputName: L10n.text("status.reading_short"),
+        anchoredInputName: L10n.text("input.auto_builtin"),
         bluetoothOutputActive: false,
         correctionCount: 0,
         lastCorrectionDate: nil

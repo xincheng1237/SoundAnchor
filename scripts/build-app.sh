@@ -14,6 +14,7 @@ DMG_STAGING_DIR="/private/tmp/soundanchor-dmg-staging"
 rm -rf "$BUILD_DIR" "$DIST_APP" "$DMG_STAGING_DIR"
 mkdir -p "$BUILD_DIR" "$DIST_DIR" "$APP_DIR/Contents/MacOS" "$APP_DIR/Contents/Resources"
 cp "$ROOT/Assets/AppIcon.icns" "$APP_DIR/Contents/Resources/AppIcon.icns"
+ditto "$ROOT/App/Resources" "$APP_DIR/Contents/Resources"
 
 cd "$ROOT"
 CLANG_MODULE_CACHE_PATH=/private/tmp/soundanchor-clang-cache \
@@ -34,7 +35,10 @@ xattr -cr "$APP_DIR"
 codesign --verify --deep --strict "$APP_DIR"
 
 ditto "$APP_DIR" "$DIST_APP"
-xattr -cr "$DIST_APP" || true
+xattr -cr "$DIST_APP"
+codesign --force --deep --sign - "$DIST_APP"
+xattr -cr "$DIST_APP"
+codesign --verify --deep --strict "$DIST_APP"
 
 mkdir -p "$DMG_STAGING_DIR"
 ditto "$APP_DIR" "$DMG_STAGING_DIR/$APP_NAME.app"

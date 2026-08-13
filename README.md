@@ -35,6 +35,7 @@
 - 可隐藏菜单栏图标，后台保护仍然运行
 - 完全本地运行，无网络请求、无遥测、不录音
 - 支持 Apple Silicon 和 Intel Mac，macOS 13 或更高版本
+- 原生支持简体中文和英文界面，跟随 macOS 语言自动切换
 
 ## 使用
 
@@ -64,7 +65,7 @@ swift test
 
 ```text
 dist/声锚 SoundAnchor.app
-dist/SoundAnchor-0.1.0-macOS.dmg
+dist/SoundAnchor-0.1.1-macOS.dmg
 ```
 
 ## 故障排查

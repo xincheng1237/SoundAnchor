@@ -2,6 +2,13 @@
 
 All notable changes to SoundAnchor are documented here.
 
+## [0.1.1] - 2026-08-13
+
+### Added
+
+- Native English and Simplified Chinese localization for menus, settings, status messages, errors, and the About dialog.
+- Automatic language selection based on the macOS preferred language, with English as the fallback.
+
 ## [0.1.0] - 2026-08-13
 
 ### Added

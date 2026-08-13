@@ -15,6 +15,7 @@ SoundAnchor is a lightweight, event-driven macOS menu bar utility that prevents 
 - Can hide its menu bar item while protection continues in the background
 - Fully local: no network access, telemetry, recording, or audio inspection
 - Universal binary for Apple Silicon and Intel Macs; macOS 13 or later
+- Native English and Simplified Chinese interface that follows the macOS language setting
 
 ## How it works
 

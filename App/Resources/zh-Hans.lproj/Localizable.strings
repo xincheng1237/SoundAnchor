@@ -1,0 +1,38 @@
+"app.name" = "声锚 SoundAnchor";
+
+"protection.enable" = "启用音质保护";
+"protection.bluetooth_only.menu" = "仅在蓝牙输出时保护";
+"protection.bluetooth_only.settings" = "仅在蓝牙输出设备使用时保护";
+"input.anchored" = "锚定的输入设备";
+"input.none_found" = "未找到输入设备";
+"input.auto_builtin" = "自动选择内建麦克风";
+"launch_at_login" = "登录时自动运行";
+"menu_bar.show" = "在菜单栏中显示";
+
+"action.repair_now" = "立即修复";
+"action.settings" = "设置…";
+"action.about" = "关于声锚";
+"action.quit" = "退出声锚";
+"action.ok" = "好";
+
+"settings.window_title" = "声锚设置";
+"settings.subtitle" = "防止蓝牙耳机因被选作麦克风而退回低音质通话模式。";
+
+"status.reading" = "正在读取音频状态…";
+"status.reading_short" = "正在读取…";
+"status.active" = "保护中";
+"status.corrected" = "已自动修复";
+"status.waiting_for_bluetooth" = "等待蓝牙输出";
+"status.disabled" = "保护已暂停";
+"status.target_unavailable" = "找不到锚定设备";
+"status.summary" = "%@ · 输入：%@ · 输出：%@";
+
+"audio.no_input" = "无输入设备";
+"audio.no_output" = "无输出设备";
+"audio.not_found" = "未找到";
+"audio.unknown_device" = "未知设备";
+
+"error.launch_at_login" = "无法更改登录启动设置";
+"error.change_default_input" = "无法切换默认输入";
+
+"about.message" = "让蓝牙耳机保持高音质。\n\n事件驱动，无轮询、无遥测、无网络请求。";

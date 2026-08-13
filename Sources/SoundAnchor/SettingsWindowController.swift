@@ -4,12 +4,12 @@ final class SettingsWindowController: NSWindowController {
     private let preferences: Preferences
     private let audioController: CoreAudioController
     private let onMenuBarVisibilityChange: (Bool) -> Void
-    private let enabledCheckbox = NSButton(checkboxWithTitle: "启用音质保护", target: nil, action: nil)
-    private let bluetoothOnlyCheckbox = NSButton(checkboxWithTitle: "仅在蓝牙输出设备使用时保护", target: nil, action: nil)
-    private let loginCheckbox = NSButton(checkboxWithTitle: "登录时自动运行", target: nil, action: nil)
-    private let menuBarCheckbox = NSButton(checkboxWithTitle: "在菜单栏中显示", target: nil, action: nil)
+    private let enabledCheckbox = NSButton(checkboxWithTitle: L10n.text("protection.enable"), target: nil, action: nil)
+    private let bluetoothOnlyCheckbox = NSButton(checkboxWithTitle: L10n.text("protection.bluetooth_only.settings"), target: nil, action: nil)
+    private let loginCheckbox = NSButton(checkboxWithTitle: L10n.text("launch_at_login"), target: nil, action: nil)
+    private let menuBarCheckbox = NSButton(checkboxWithTitle: L10n.text("menu_bar.show"), target: nil, action: nil)
     private let inputPopup = NSPopUpButton(frame: .zero, pullsDown: false)
-    private let statusLabel = NSTextField(labelWithString: "正在读取音频状态…")
+    private let statusLabel = NSTextField(wrappingLabelWithString: L10n.text("status.reading"))
     private var devices: [AudioDevice] = []
     private var snapshot = AudioSnapshot.starting
 
@@ -27,7 +27,7 @@ final class SettingsWindowController: NSWindowController {
             backing: .buffered,
             defer: false
         )
-        window.title = "声锚设置"
+        window.title = L10n.text("settings.window_title")
         window.isReleasedWhenClosed = false
         super.init(window: window)
         configureContent()
@@ -53,20 +53,20 @@ final class SettingsWindowController: NSWindowController {
     private func configureContent() {
         guard let content = window?.contentView else { return }
 
-        let title = NSTextField(labelWithString: "声锚 SoundAnchor")
+        let title = NSTextField(labelWithString: L10n.text("app.name"))
         title.font = .systemFont(ofSize: 24, weight: .bold)
 
-        let subtitle = NSTextField(wrappingLabelWithString: "防止蓝牙耳机因被选作麦克风而退回低音质通话模式。")
+        let subtitle = NSTextField(wrappingLabelWithString: L10n.text("settings.subtitle"))
         subtitle.textColor = .secondaryLabelColor
 
-        let inputLabel = NSTextField(labelWithString: "锚定的输入设备")
+        let inputLabel = NSTextField(labelWithString: L10n.text("input.anchored"))
         inputLabel.font = .systemFont(ofSize: 13, weight: .medium)
 
         statusLabel.maximumNumberOfLines = 3
         statusLabel.lineBreakMode = .byWordWrapping
         statusLabel.textColor = .secondaryLabelColor
 
-        let repairButton = NSButton(title: "立即修复", target: self, action: #selector(repairNow))
+        let repairButton = NSButton(title: L10n.text("action.repair_now"), target: self, action: #selector(repairNow))
         repairButton.bezelStyle = .rounded
 
         enabledCheckbox.target = self
@@ -100,6 +100,7 @@ final class SettingsWindowController: NSWindowController {
         stack.edgeInsets = NSEdgeInsets(top: 22, left: 24, bottom: 20, right: 24)
         stack.translatesAutoresizingMaskIntoConstraints = false
         inputPopup.widthAnchor.constraint(equalToConstant: 310).isActive = true
+        statusLabel.widthAnchor.constraint(equalToConstant: 422).isActive = true
 
         content.addSubview(stack)
         NSLayoutConstraint.activate([
@@ -134,19 +135,19 @@ final class SettingsWindowController: NSWindowController {
         let headline: String
         switch snapshot.protectionState {
         case .active:
-            headline = "保护中"
+            headline = L10n.text("status.active")
         case .corrected:
-            headline = "已自动修复"
+            headline = L10n.text("status.corrected")
         case .waitingForBluetooth:
-            headline = "等待蓝牙输出"
+            headline = L10n.text("status.waiting_for_bluetooth")
         case .disabled:
-            headline = "保护已暂停"
+            headline = L10n.text("status.disabled")
         case .targetUnavailable:
-            headline = "找不到锚定设备"
+            headline = L10n.text("status.target_unavailable")
         case .error(let message):
             headline = message
         }
-        return "\(headline) · 输入：\(snapshot.currentInputName) · 输出：\(snapshot.currentOutputName)"
+        return L10n.format("status.summary", headline, snapshot.currentInputName, snapshot.currentOutputName)
     }
 
     @objc private func toggleProtection() {
@@ -172,7 +173,7 @@ final class SettingsWindowController: NSWindowController {
         } catch {
             loginCheckbox.state = LoginItemManager.isEnabled ? .on : .off
             let alert = NSAlert(error: error)
-            alert.messageText = "无法更改登录启动设置"
+            alert.messageText = L10n.text("error.launch_at_login")
             alert.runModal()
         }
     }

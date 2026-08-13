@@ -1,0 +1,38 @@
+"app.name" = "声锚 SoundAnchor";
+
+"protection.enable" = "Enable audio quality protection";
+"protection.bluetooth_only.menu" = "Protect only with Bluetooth output";
+"protection.bluetooth_only.settings" = "Protect only when a Bluetooth output device is in use";
+"input.anchored" = "Anchored input device";
+"input.none_found" = "No input devices found";
+"input.auto_builtin" = "Automatically select built-in microphone";
+"launch_at_login" = "Launch at Login";
+"menu_bar.show" = "Show in Menu Bar";
+
+"action.repair_now" = "Repair Now";
+"action.settings" = "Settings…";
+"action.about" = "About SoundAnchor";
+"action.quit" = "Quit SoundAnchor";
+"action.ok" = "OK";
+
+"settings.window_title" = "SoundAnchor Settings";
+"settings.subtitle" = "Prevents Bluetooth headphones from falling back to low-quality call audio when selected as the microphone.";
+
+"status.reading" = "Reading audio status…";
+"status.reading_short" = "Reading…";
+"status.active" = "Protected";
+"status.corrected" = "Automatically repaired";
+"status.waiting_for_bluetooth" = "Waiting for Bluetooth output";
+"status.disabled" = "Protection paused";
+"status.target_unavailable" = "Anchored device unavailable";
+"status.summary" = "%@ · Input: %@ · Output: %@";
+
+"audio.no_input" = "No input device";
+"audio.no_output" = "No output device";
+"audio.not_found" = "Not found";
+"audio.unknown_device" = "Unknown device";
+
+"error.launch_at_login" = "Unable to change the launch-at-login setting";
+"error.change_default_input" = "Unable to change the default input";
+
+"about.message" = "Keep Bluetooth headphones in high-quality audio mode.\n\nEvent-driven, with no polling, telemetry, or network requests.";

@@ -134,7 +134,7 @@ final class CoreAudioController {
                     scheduleRaceRetries()
                 }
             } else {
-                publish(state: .error("无法切换默认输入"), currentInput: currentInput, currentOutput: currentOutput, target: target, devices: inputDevices)
+                publish(state: .error(L10n.text("error.change_default_input")), currentInput: currentInput, currentOutput: currentOutput, target: target, devices: inputDevices)
             }
         case .active:
             publish(state: .active, currentInput: currentInput, currentOutput: currentOutput, target: target, devices: inputDevices)
@@ -174,9 +174,9 @@ final class CoreAudioController {
     ) {
         let snapshot = AudioSnapshot(
             protectionState: state,
-            currentInputName: currentInput?.name ?? "无输入设备",
-            currentOutputName: currentOutput?.name ?? "无输出设备",
-            anchoredInputName: target?.name ?? "未找到",
+            currentInputName: currentInput?.name ?? L10n.text("audio.no_input"),
+            currentOutputName: currentOutput?.name ?? L10n.text("audio.no_output"),
+            anchoredInputName: target?.name ?? L10n.text("audio.not_found"),
             bluetoothOutputActive: currentOutput?.isBluetooth == true,
             correctionCount: correctionCount,
             lastCorrectionDate: lastCorrectionDate
@@ -208,7 +208,7 @@ final class CoreAudioController {
             return AudioDevice(
                 id: id,
                 uid: uid,
-                name: stringProperty(id, selector: kAudioObjectPropertyName) ?? "未知设备",
+                name: stringProperty(id, selector: kAudioObjectPropertyName) ?? L10n.text("audio.unknown_device"),
                 transportType: uint32Property(id, selector: kAudioDevicePropertyTransportType) ?? 0,
                 inputChannels: channelCount(id, scope: kAudioObjectPropertyScopeInput),
                 outputChannels: channelCount(id, scope: kAudioObjectPropertyScopeOutput)

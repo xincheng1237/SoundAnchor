@@ -10,6 +10,12 @@ if [[ ! -d "$SOURCE" ]]; then
   "$ROOT/scripts/build-app.sh"
 fi
 
+pkill -x SoundAnchor 2>/dev/null || true
+for _ in {1..20}; do
+  pgrep -x SoundAnchor >/dev/null || break
+  sleep 0.1
+done
+
 mkdir -p "$HOME/Applications"
 rm -rf "$DESTINATION"
 ditto "$SOURCE" "$DESTINATION"
